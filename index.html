@@ -35,7 +35,7 @@
             font-weight: 600; 
             box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); 
         }
-        .nav-button:hover:not(.active-overview):not(.active-plan):not(.active-calendar):not(.active-pacer):not(.active-news) { 
+        .nav-button:hover:not(.active-overview):not(.active-plan):not(.active-calendar):not(.active-race):not(.active-pacer):not(.active-news) { 
             background-color: #f3f4f6; 
             color: #1f2937; 
         }
@@ -48,6 +48,10 @@
         
         .nav-button.active-calendar { background-color: #059669; color: white; } 
         .nav-button.active-calendar:hover { background-color: #047857; } 
+
+        .nav-button.active-race { background-color: #7c3aed; color: white; } 
+        .nav-button.active-race:hover { background-color: #6d28d9; }
+
 
         .nav-button.active-pacer { background-color: #e11d48; color: white; } 
         .nav-button.active-pacer:hover { background-color: #be123c; } 
@@ -119,6 +123,12 @@
             border-bottom-width: 4px;
             border-left-color: #4f46e5; 
             border-bottom-color: #059669; 
+        }
+        .race-section-card { 
+            border-left-width: 4px;
+            border-bottom-width: 4px;
+            border-left-color: #7c3aed; 
+            border-bottom-color: #db2777; 
         }
 
 
@@ -296,37 +306,35 @@
             .schedule-table th, .schedule-table td {
                 border: 1px solid #ccc !important; 
             }
-            .pdf-button, .nav-button, header, nav, #calendar-controls, .calendar-grid, #pace-utils-content, #todays-training-card, #mileageChart, .chart-container p, #calendar-selected-day-header, #raceDateInputContainer {
+            .pdf-button, .nav-button, header, nav, #calendar-controls, .calendar-grid, #pace-utils-content, #todays-training-card, #mileageChart, .chart-container p, #calendar-selected-day-header, #raceDateInputContainer, #raceElevationChartContainer { 
                 display: none !important; 
             }
         }
         /* Styles for Today's Zones table (compact) */
         .today-pace-table {
             width: 100%;
-            margin-top: 0.5rem; /* mt-2 */
+            margin-top: 0.5rem; 
             border-collapse: collapse;
-            font-size: 0.75rem; /* text-xs */
+            font-size: 0.75rem; 
         }
         .today-pace-table th, .today-pace-table td {
-            border: 1px solid #e5e7eb; /* stone-200 */
-            padding: 0.25rem 0.4rem; /* Smaller padding */
+            border: 1px solid #e5e7eb; 
+            padding: 0.25rem 0.4rem; 
             text-align: left;
         }
         .today-pace-table th {
-            background-color: #f9fafb; /* stone-50 */
-            font-weight: 500; /* medium */
+            background-color: #f9fafb; 
+            font-weight: 500; 
         }
-        /* Specific colors for pace table headers */
-        .today-pace-table th.header-zone { color: #1f2937; } /* Default black/dark gray */
-        .today-pace-table th.header-pace { color: #1f2937; } /* Default black/dark gray */
-        .today-pace-table th.header-low { color: #2563eb; } /* blue-600 */
-        .today-pace-table th.header-average { color: #16a34a; } /* green-600 */
-        .today-pace-table th.header-high { color: #dc2626; } /* red-600 */
+        .today-pace-table th.header-zone { color: #1f2937; } 
+        .today-pace-table th.header-pace { color: #1f2937; } 
+        .today-pace-table th.header-low { color: #2563eb; } 
+        .today-pace-table th.header-average { color: #16a34a; } 
+        .today-pace-table th.header-high { color: #dc2626; } 
 
-        .today-pace-table td:first-child { /* Zone name or Dist. cell */
+        .today-pace-table td:first-child { 
             font-weight: 500;
         }
-        /* Framed box for today's activity */
         .todays-activity-box {
             border: 1px solid #e5e7eb; 
             background-color: #ffffff; 
@@ -336,23 +344,23 @@
         }
         .todays-activity-box p strong { 
             font-weight: 600; 
-            color: #0369a1; /* sky-700 */
-            font-size: 1.125rem; /* text-lg */
+            color: #0369a1; 
+            font-size: 1.125rem; 
             line-height: 1.6; 
         }
         .todays-weekly-notes-box {
-            border: 1px solid #e5e7eb; /* stone-200 */
-            background-color: #f9fafb; /* stone-50, slightly different from activity box */
+            border: 1px solid #e5e7eb; 
+            background-color: #f9fafb; 
             padding: 0.75rem;
             border-radius: 0.375rem;
-            margin-top: 0.5rem; /* mt-2 */
+            margin-top: 0.5rem; 
         }
 
 
         /* Mobile Calendar Compact Styles */
-        @media (max-width: 639px) { /* sm breakpoint or adjust as needed */
+        @media (max-width: 639px) { 
             .calendar-day {
-                min-height: 40px; /* More compact */
+                min-height: 40px; 
                 padding: 0.25rem;
                 display: flex;
                 align-items: center;
@@ -360,38 +368,26 @@
                 position: relative;
             }
             .calendar-day .day-number {
-                font-size: 0.875rem; /* Slightly larger for visibility in small box */
+                font-size: 0.875rem; 
                 margin-bottom: 0;
-                z-index: 1; /* Ensure number is above background color */
             }
             .calendar-day .activity-thumbnail {
-                display: none; /* Hide text thumbnail on mobile */
+                display: none; 
             }
-            /* Apply background colors directly to the day cell for mobile */
-            .calendar-day.activity-thumbnail-easy { background-color: #e0f2fe; }
-            .calendar-day.activity-thumbnail-easy .day-number { color: #0c4a6e; }
-
-            .calendar-day.activity-thumbnail-tempo { background-color: #ffedd5; }
-            .calendar-day.activity-thumbnail-tempo .day-number { color: #c2410c; }
-
-            .calendar-day.activity-thumbnail-interval { background-color: #fee2e2; }
-            .calendar-day.activity-thumbnail-interval .day-number { color: #b91c1c; }
-            
-            .calendar-day.activity-thumbnail-long { background-color: #f3e8ff; }
-            .calendar-day.activity-thumbnail-long .day-number { color: #7e22ce; }
-
-            .calendar-day.activity-thumbnail-race { background-color: #fce7f3; }
-            .calendar-day.activity-thumbnail-race .day-number { color: #be185d; }
-
-            .calendar-day.activity-thumbnail-rest { background-color: #f1f5f9; }
-            .calendar-day.activity-thumbnail-rest .day-number { color: #475569; }
-
-            .calendar-day.activity-thumbnail-default { background-color: #e0f2fe; }
-            .calendar-day.activity-thumbnail-default .day-number { color: #0c4a6e; }
+            .calendar-day.activity-thumbnail-easy { background-color: #e0f2fe; color: #0c4a6e !important; }
+            .calendar-day.activity-thumbnail-tempo { background-color: #ffedd5; color: #c2410c !important; }
+            .calendar-day.activity-thumbnail-interval { background-color: #fee2e2; color: #b91c1c !important; }
+            .calendar-day.activity-thumbnail-long { background-color: #f3e8ff; color: #7e22ce !important; }
+            .calendar-day.activity-thumbnail-race { background-color: #fce7f3; color: #be185d !important; }
+            .calendar-day.activity-thumbnail-rest { background-color: #f1f5f9; color: #475569 !important; }
+            .calendar-day.activity-thumbnail-default { background-color: #e0f2fe; color: #0c4a6e !important; }
             
             .calendar-day.is-today .day-number { 
                 color: #065f46; 
-                font-weight: 900; 
+            }
+             .calendar-day.has-activity .day-number { 
+                mix-blend-mode: difference; 
+                filter: invert(1) grayscale(1) contrast(100); 
             }
         }
 
@@ -401,11 +397,11 @@
 <body class="min-h-screen p-4 py-8"> <div id="login-container" class="main-container">
         <header class="mb-8 text-center">
              <div class="header-logo-container mb-4"> 
-                <img src="https://iliosports.com/wp-content/uploads/2021/03/logo-13.png"
-                     alt="Helios Running Team Logo"
-                     class="header-logo"
-                     onerror="this.parentElement.innerHTML='<h1 class=\'text-2xl sm:text-3xl font-bold text-white\'>Helios Running</h1>'">
-            </div>
+                 <img src="https://iliosports.com/wp-content/uploads/2021/03/logo-13.png"
+                      alt="Helios Running Team Logo"
+                      class="header-logo"
+                      onerror="this.parentElement.innerHTML='<h1 class=\'text-2xl sm:text-3xl font-bold text-white\'>Helios Running</h1>'">
+             </div>
             <h1 class="text-3xl sm:text-4xl main-title text-stone-800 mt-2"> 
                 <span class="title-project" id="mainTitleProject">project:</span> <span class="title-marathon" id="mainTitleMarathon">Marathon</span>
             </h1>
@@ -450,6 +446,7 @@
             <button id="nav-news" class="nav-button">{NAV_NEWS_TEXT}</button>
             <button id="nav-plan" class="nav-button">{NAV_PLAN_TEXT}</button>
             <button id="nav-calendar" class="nav-button">{NAV_CALENDAR_TEXT}</button>
+            <button id="nav-race" class="nav-button">{NAV_RACE_TEXT}</button> 
             <button id="nav-pacer" class="nav-button">{NAV_PACER_TEXT}</button>
         </nav>
 
@@ -462,22 +459,32 @@
                 Loading training plan data from Google Sheet...
             </div>
             <div id="error-message" class="hidden"></div>
-            </main>
+        </main>
     </div>
 
 <script>
-const DEFAULT_RACE_DATE_STRING = '2025-11-09';
+const DEFAULT_RACE_DATE_STRING = '2025-11-09'; 
 let currentWebAppUrl = ''; 
 
 const userSpecificDataSources = {
+    "ADMIN": "https://script.google.com/macros/s/AKfycbxIUWxC56PDoBwj6SvnlSXDoDWCIvdjizPQwCpz1xMMekP3qX5pemh-J_y9vW4VIFSaJA/exec", // Renamed and using the last provided URL
     "USER_HELIOS": "https://script.google.com/macros/s/AKfycbwcdAtQXpojQk4_jtn4pHoZm2JQihJaYMogcJZJNJLX46ILP0zODpuPyVi0b5n9wLeG7w/exec", 
-    "USER_APOLLO": "YOUR_APPS_SCRIPT_URL_FOR_APOLLO_SHEET_HERE",
+    "USER_APOLLO": "YOUR_APPS_SCRIPT_URL_FOR_APOLLO_SHEET_HERE", 
+    "USER_NEW": "https://script.google.com/macros/s/AKfycbwUkgEWQtG-pIvKw4lBiL9QgSRQfU5ZPbs4RUX9g6RRza-WYEAhAOI2Z5WfjPb_5lqKNA/exec",
+    // Placeholder for RUN1 to RUN50
 };
+
+// Dynamically add RUN1 to RUN50
+for (let i = 1; i <= 50; i++) {
+    userSpecificDataSources[`RUN${i}`] = `YOUR_APPS_SCRIPT_URL_FOR_RUN${i}_HERE`;
+}
+
 
 let marathonPlan = null; 
 let datedTrainingPlan = []; 
 let currentRaceDate = null; 
 let calendarCurrentDisplayDate = new Date(); 
+let raceElevationChartInstance = null; 
 
 const loginContainer = document.getElementById('login-container');
 const mainAppWrapper = document.getElementById('main-app-wrapper');
@@ -492,7 +499,6 @@ let mileageChartInstance = null;
 async function callGeminiApi(prompt, targetElementId, loadingElementId) {
     const targetElement = document.getElementById(targetElementId);
     const loadingIndicator = document.getElementById(loadingElementId);
-
     if (!targetElement || !loadingIndicator) {
         if (targetElement) {
              targetElement.innerHTML = "<p>Error: UI element missing for Gemini response.</p>";
@@ -501,20 +507,16 @@ async function callGeminiApi(prompt, targetElementId, loadingElementId) {
         console.error("Gemini API: Target or loading element not found for ID:", targetElementId, loadingElementId);
         return;
     }
-
     loadingIndicator.classList.remove('hidden');
     targetElement.innerHTML = ''; 
     targetElement.classList.add('hidden');
-
     const payloadToAppsScript = { action: "callGemini", prompt: prompt };
-    
     try {
         const response = await fetch(currentWebAppUrl, {
             method: 'POST', mode: 'cors', cache: 'no-cache',
             headers: { 'Content-Type': 'application/json', },
             redirect: 'follow', body: JSON.stringify(payloadToAppsScript)
         });
-
         if (!response.ok) {
             const errorTextFromServer = await response.text();
             console.error("Error response from Apps Script proxy:", response.status, response.statusText, errorTextFromServer);
@@ -585,24 +587,22 @@ function updateStaticUIText() {
         document.getElementById('nav-news').textContent = 'News';
         document.getElementById('nav-plan').textContent = 'Training Plan';
         document.getElementById('nav-calendar').textContent = 'Calendar';
+        document.getElementById('nav-race').textContent = 'Race'; 
         document.getElementById('nav-pacer').textContent = 'Pacer';
         return;
     }
-
     const uiText = marathonPlan.uiText;
-
     document.getElementById('loginButton').textContent = uiText.loginButtonText || 'Load Plan';
     document.getElementById('mainTitleProject').textContent = uiText.mainTitleProject || 'project:';
     document.getElementById('mainTitleMarathon').textContent = uiText.mainTitleMarathon || 'Marathon';
-    
     document.getElementById('appHeaderTitleProject').textContent = uiText.mainTitleProject || 'project:';
     document.getElementById('appHeaderTitleMarathon').textContent = uiText.mainTitleMarathon || 'Marathon';
     document.getElementById('appSubtitle').textContent = uiText.appSubtitle || 'Your interactive guide to marathon training.';
-
     document.getElementById('nav-overview').textContent = uiText.navButtonOverview || 'Plan Overview';
     document.getElementById('nav-news').textContent = uiText.navButtonNews || 'News';
     document.getElementById('nav-plan').textContent = uiText.navButtonPlan || 'Training Plan';
     document.getElementById('nav-calendar').textContent = uiText.navButtonCalendar || 'Calendar';
+    document.getElementById('nav-race').textContent = uiText.navButtonRace || 'Race'; 
     document.getElementById('nav-pacer').textContent = uiText.navButtonPacer || 'Pacer';
 }
 
@@ -625,48 +625,63 @@ async function fetchMarathonPlan(webAppUrlToUse) {
             throw new Error(`Error from Google Sheet App: ${data.error}`);
         }
         if (!data.uiText || typeof data.uiText !== 'object' ||
-            !data.settings || !data.settings.zones || !Array.isArray(data.settings.zones) || !data.settings.hasOwnProperty('defaultLt2Speed') || 
+            !data.settings || !data.settings.zones || !Array.isArray(data.settings.zones) || 
+            !data.settings.hasOwnProperty('defaultLt2Speed') ||
+            !data.settings.hasOwnProperty('raceName') || 
+            !data.settings.hasOwnProperty('raceDate') || 
+            !data.settings.hasOwnProperty('raceDistanceKm') || 
             !data.philosophy || !data.philosophy.title || !Array.isArray(data.philosophy.content) ||
             !data.paceGuide || !data.paceGuide.title || !Array.isArray(data.paceGuide.paces) ||
             !data.generalNotes || !data.generalNotes.title || !Array.isArray(data.generalNotes.notes) ||
-            !Array.isArray(data.phases)
+            !Array.isArray(data.phases) || 
+            !Array.isArray(data.mileageChartDataSource) ||
+            !Array.isArray(data.raceElevationData) ||
+            !data.raceTactics || typeof data.raceTactics !== 'object' 
             ) {
-            throw new Error("Fetched data incomplete or malformed. Check Apps Script doGet & Sheet structure (including UIText, Settings (with defaultLt2Speed), Plan Overview).");
+            throw new Error("Fetched data incomplete or malformed. Check Apps Script doGet & Sheet structure (ensure all new fields like raceName, raceDate, raceDistanceKm, raceElevationData, raceTactics are present).");
         }
-        marathonPlan = data;
-        updateStaticUIText(); 
+        marathonPlan = data; 
+        updateStaticUIText();
 
-        const storedRaceDate = localStorage.getItem('marathonRaceDate');
-        if (storedRaceDate) {
-            const parsedDate = new Date(storedRaceDate + 'T00:00:00');
-            if (isValidDate(parsedDate)) currentRaceDate = parsedDate;
+        let raceDateToUse = DEFAULT_RACE_DATE_STRING;
+        if (marathonPlan.settings && marathonPlan.settings.raceDate && isValidDate(new Date(marathonPlan.settings.raceDate + 'T00:00:00'))) {
+            raceDateToUse = marathonPlan.settings.raceDate;
+            console.log("Using race date from Google Sheet:", raceDateToUse);
+        } else {
+            const storedRaceDate = localStorage.getItem('marathonRaceDate');
+            if (storedRaceDate && isValidDate(new Date(storedRaceDate + 'T00:00:00'))) {
+                raceDateToUse = storedRaceDate;
+                console.log("Using race date from localStorage:", raceDateToUse);
+            } else {
+                 console.log("Using default race date string:", raceDateToUse);
+            }
         }
-        if (!currentRaceDate) {
-            currentRaceDate = new Date(DEFAULT_RACE_DATE_STRING + 'T00:00:00'); 
-            localStorage.setItem('marathonRaceDate', DEFAULT_RACE_DATE_STRING);
-        }
-        calculateAndStoreDatedTrainingPlan(currentRaceDate);
+        currentRaceDate = new Date(raceDateToUse + 'T00:00:00');
+        localStorage.setItem('marathonRaceDate', raceDateToUse); 
+        
+        calculateAndStoreDatedTrainingPlan(currentRaceDate); 
         calendarCurrentDisplayDate = new Date(); 
         calendarCurrentDisplayDate.setDate(1); 
-        return true;
+        return true; 
     } catch (error) {
         console.error('Failed to fetch marathon plan:', error);
         loginErrorMessageDiv.textContent = `Error loading plan: ${error.message}. Check User ID and Sheet/Script setup.`;
         loginErrorMessageDiv.classList.remove('hidden');
         loginLoadingMessageDiv.classList.add('hidden');
-        return false;
+        return false; 
     }
 }
 
 function initializeApp() {
     if(loadingMessageDiv) loadingMessageDiv.classList.add('hidden');
     if(errorMessageDiv) errorMessageDiv.classList.add('hidden');
-    if(appContent) appContent.innerHTML = '';
+    if(appContent) appContent.innerHTML = ''; 
 
     document.getElementById('nav-overview').addEventListener('click', renderOverview);
     document.getElementById('nav-news').addEventListener('click', renderNewsTab); 
     document.getElementById('nav-plan').addEventListener('click', renderTrainingPlan);
     document.getElementById('nav-calendar').addEventListener('click', renderCalendarTab);
+    document.getElementById('nav-race').addEventListener('click', renderRaceTab); 
     document.getElementById('nav-pacer').addEventListener('click', renderPaceUtilities);
     
     renderOverview(); 
@@ -676,27 +691,25 @@ function initializeApp() {
 
 async function handleLogin() {
     const userIdInput = document.getElementById('userIdInput');
-    const userId = userIdInput.value.trim().toUpperCase();
-
+    const userId = userIdInput.value.trim().toUpperCase(); 
     loginErrorMessageDiv.classList.add('hidden');
     loginLoadingMessageDiv.classList.remove('hidden');
-    currentWebAppUrl = userSpecificDataSources[userId];
-
-    if (currentWebAppUrl) {
-        localStorage.setItem('lastUserID', userId);
+    currentWebAppUrl = userSpecificDataSources[userId]; 
+    if (currentWebAppUrl) { 
+        localStorage.setItem('lastUserID', userId); 
         localStorage.setItem('lastWebAppUrl', currentWebAppUrl);
-        const success = await fetchMarathonPlan(currentWebAppUrl);
-        if (success) initializeApp();
-        else {
+        const success = await fetchMarathonPlan(currentWebAppUrl); 
+        if (success) initializeApp(); 
+        else { 
             loginLoadingMessageDiv.classList.add('hidden');
-            localStorage.removeItem('lastUserID');
+            localStorage.removeItem('lastUserID'); 
             localStorage.removeItem('lastWebAppUrl');
         }
-    } else {
+    } else { 
         loginErrorMessageDiv.textContent = "Invalid User ID. Try again or contact admin.";
         loginErrorMessageDiv.classList.remove('hidden');
         loginLoadingMessageDiv.classList.add('hidden');
-        localStorage.removeItem('lastUserID');
+        localStorage.removeItem('lastUserID'); 
         localStorage.removeItem('lastWebAppUrl');
     }
 }
@@ -704,24 +717,25 @@ async function handleLogin() {
 function setActiveNav(activeId) {
     const navButtons = document.querySelectorAll('.nav-button');
     navButtons.forEach(btn => {
-        btn.classList.remove('active-overview', 'active-plan', 'active-calendar', 'active-pacer', 'active-news');
+        btn.classList.remove('active-overview', 'active-plan', 'active-calendar', 'active-race', 'active-pacer', 'active-news'); 
         if (btn.id === activeId) {
             if (activeId === 'nav-overview') btn.classList.add('active-overview');
             else if (activeId === 'nav-plan') btn.classList.add('active-plan');
             else if (activeId === 'nav-calendar') btn.classList.add('active-calendar');
+            else if (activeId === 'nav-race') btn.classList.add('active-race'); 
             else if (activeId === 'nav-pacer') btn.classList.add('active-pacer');
             else if (activeId === 'nav-news') btn.classList.add('active-news');
-            else btn.classList.add('active-overview');
+            else btn.classList.add('active-overview'); 
         }
     });
 }
 
 function createHtmlList(items) {
-    if (!items || !Array.isArray(items)) return '';
+    if (!items || !Array.isArray(items)) return ''; 
     return `<ul class="list-disc list-inside space-y-1 text-stone-700">${items.map(item => {
         const tempDiv = document.createElement('div');
         tempDiv.innerHTML = item; 
-        return `<li>${tempDiv.innerHTML}</li>`;
+        return `<li>${tempDiv.innerHTML}</li>`; 
     }).join('')}</ul>`;
 }
 
@@ -744,51 +758,45 @@ function isSameDay(date1, date2) {
 
 function calculateAndStoreDatedTrainingPlan(raceDateInput) {
     if (!marathonPlan || !marathonPlan.phases || !isValidDate(raceDateInput)) {
-        datedTrainingPlan = []; return;
+        datedTrainingPlan = []; return; 
     }
-    currentRaceDate = new Date(raceDateInput);
-    localStorage.setItem('marathonRaceDate', currentRaceDate.toISOString().split('T')[0]);
-
+    currentRaceDate = new Date(raceDateInput); 
+    localStorage.setItem('marathonRaceDate', currentRaceDate.toISOString().split('T')[0]); 
     let allDaysScheduled = [];
     marathonPlan.phases.forEach(phase => {
         phase.weeks.forEach(week => {
             week.days.forEach(dayString => allDaysScheduled.push({
-                activity: dayString, notes: week.notes || "",
-                phaseName: phase.name, weekNum: week.weekNum, totalKm: week.totalKm
+                activity: dayString, notes: week.notes || "", 
+                phaseName: phase.name, weekNum: week.weekNum, totalKm: week.totalKm 
             }));
         });
     });
-
     datedTrainingPlan = [];
-    let tempCurrentDate = new Date(currentRaceDate);
+    let tempCurrentDate = new Date(currentRaceDate); 
     for (let i = allDaysScheduled.length - 1; i >= 0; i--) {
         datedTrainingPlan.unshift({ date: new Date(tempCurrentDate), ...allDaysScheduled[i] });
-        tempCurrentDate = addDays(tempCurrentDate, -1);
+        tempCurrentDate = addDays(tempCurrentDate, -1); 
     }
 }
 
 function renderTodayPaces(lt2PaceString) {
     const zonesContainer = document.getElementById('today-zones-content');
     const repeatsContainer = document.getElementById('today-repeats-content');
-
     if (!zonesContainer || !repeatsContainer ) { 
         if(zonesContainer) zonesContainer.innerHTML = `<p class="text-xs text-red-500 italic">UI error for pace display.</p>`;
         return;
     }
-
     if (!lt2PaceString || lt2PaceString === "N/A") {
         zonesContainer.innerHTML = `<p class="text-xs text-stone-500 italic">Set Default LT2 Speed in Settings sheet to see paces.</p>`;
-        repeatsContainer.innerHTML = '';
+        repeatsContainer.innerHTML = ''; 
         return;
     }
-
     const lt2SpeedInSeconds = parsePaceToSeconds(lt2PaceString);
     if (isNaN(lt2SpeedInSeconds) || lt2SpeedInSeconds <= 0) {
         zonesContainer.innerHTML = `<p class="text-xs text-red-500 italic">Invalid LT2 speed format in Settings ('${lt2PaceString}'). Use mm:ss.</p>`;
         repeatsContainer.innerHTML = '';
         return;
     }
-
     const zonesData = [
         { name: "Z1", descriptor: "Easy/Rec", lowPaceFactor: 1.54, highPaceFactor: 1.33, colorClass: "text-green-600" },
         { name: "Z2", descriptor: "Aerobic", lowPaceFactor: 1.32, highPaceFactor: 1.16, colorClass: "text-sky-600" },
@@ -806,7 +814,7 @@ function renderTodayPaces(lt2PaceString) {
     zonesData.forEach(zone => {
         const sPS = lt2SpeedInSeconds * zone.lowPaceFactor; 
         const fPS = lt2SpeedInSeconds * zone.highPaceFactor; 
-        const avgPS = (sPS + fPS) / 2;
+        const avgPS = (sPS + fPS) / 2; 
         zonesTableHtml += `<tr>
                              <td class="${zone.colorClass} font-semibold">${zone.name}</td>
                              <td>${formatSecondsToPace(sPS)} - ${formatSecondsToPace(fPS)}</td>
@@ -817,15 +825,14 @@ function renderTodayPaces(lt2PaceString) {
     });
     zonesTableHtml += `</tbody></table>`;
     zonesContainer.innerHTML = zonesTableHtml;
-
     const repeatDistances = [
         {d:"3km",f:1.02,m:3},{d:"1 Mile",f:0.98,m:1.60934},{d:"1km",f:0.95,m:1},
         {d:"800m",f:0.92,m:0.8},{d:"400m",f:0.88,m:0.4},{d:"200m",f:0.85,m:0.2}
     ];
     let repeatsTableHtml = `<table class="today-pace-table mt-2"><thead><tr><th>Dist.</th><th>Time</th><th>Pace/km</th></tr></thead><tbody></tbody>`;
     repeatDistances.forEach(item => {
-        const tPPS = lt2SpeedInSeconds * item.f;
-        const tTDS = tPPS * item.m;
+        const tPPS = lt2SpeedInSeconds * item.f; 
+        const tTDS = tPPS * item.m; 
         repeatsTableHtml += `<tr><td class="text-teal-700 font-semibold">${item.d}</td><td>${formatSecondsToPace(tTDS)}</td><td>${formatSecondsToPace(tPPS)}</td></tr>`;
     });
     repeatsTableHtml += `</tbody></table>`;
@@ -835,62 +842,53 @@ function renderTodayPaces(lt2PaceString) {
 function renderTodaysTraining() {
     const container = document.getElementById('todays-training-content');
     if (!container || !marathonPlan || !marathonPlan.uiText || !marathonPlan.uiText.overview) {
-        if(container) container.innerHTML = "<p>Loading today's training data...</p>";
+        if(container) container.innerHTML = "<p>Loading today's training data...</p>"; 
         return;
     }
-
     if (!currentRaceDate) {
         container.innerHTML = `<p class="text-sm text-sky-700">Set race date in <button onclick="document.getElementById('nav-calendar').click();" class="underline font-semibold">${marathonPlan.uiText.navButtonCalendar || 'Calendar'}</button> for today's training. Default: ${DEFAULT_RACE_DATE_STRING}.</p>`;
         return;
     }
     if (datedTrainingPlan.length === 0 && currentRaceDate && marathonPlan) calculateAndStoreDatedTrainingPlan(currentRaceDate);
-    
     const today = new Date(); 
-    today.setHours(0,0,0,0);
-
+    today.setHours(0,0,0,0); 
     const todaysActivity = datedTrainingPlan.find(item => {
         const itemDate = new Date(item.date); 
-        itemDate.setHours(0,0,0,0);
+        itemDate.setHours(0,0,0,0); 
         return isSameDay(itemDate, today);
     });
-    
     let activityContentHtml = '';
     let titleHtml = `<h3 class="text-xl font-semibold text-sky-700 mb-1 text-center">Today</h3>
-                     <p class="text-xs text-stone-500 text-center mb-3">${formatDate(today, { weekday: 'long', month: 'long', day: 'numeric' })}</p>`;
+                       <p class="text-xs text-stone-500 text-center mb-3">${formatDate(today, { weekday: 'long', month: 'long', day: 'numeric' })}</p>`;
     let notesBoxHtml = '';
-
-
-    if (todaysActivity) {
-        let activityText = todaysActivity.activity.replace(/^[^:]+:\s*/, '');
+    if (todaysActivity) { 
+        let activityText = todaysActivity.activity.replace(/^[^:]+:\s*/, ''); 
         activityContentHtml = `
             <div class="todays-activity-box">
                 <p><strong>${activityText}</strong></p> 
                 <p class="text-xs text-stone-500 mt-1">Phase: ${todaysActivity.phaseName} | Week: ${todaysActivity.weekNum}</p>
             </div>
         `;
-        if (todaysActivity.notes) {
+        if (todaysActivity.notes) { 
             notesBoxHtml = `
                 <div class="todays-weekly-notes-box">
                     <p class="text-sm italic"><strong class="text-black text-xs">Weekly Notes:</strong> <span class="text-stone-800 text-sm">${todaysActivity.notes}</span></p>
                 </div>
             `;
         }
-    } else {
+    } else { 
         activityContentHtml = `<div class="todays-activity-box"><p class="text-stone-700">No training scheduled for today based on race date (${formatDate(currentRaceDate)}), or outside plan duration.</p><p class="text-sm text-stone-600">This might be rest or before/after plan.</p></div>`;
     }
-    
     const paceCalculatorHtml = `
-        <h4 class="text-sm font-semibold text-sky-700 mt-3">Zones</h4>
-        <div id="today-zones-content"></div>
-        <h4 class="text-sm font-semibold text-amber-500 mt-3">Repeats</h4>
+        <h3 class="text-lg font-semibold mt-4" style="color: #0284c7;">Zones</h3> 
+        <div id="today-zones-content"></div> 
+        <h3 class="text-lg font-semibold mt-3" style="color: #f59e0b;">Repeats</h3> 
         <div id="today-repeats-content" class="mt-1"></div>
     `;
-    
     container.innerHTML = titleHtml + activityContentHtml + notesBoxHtml + paceCalculatorHtml;
-
     if (marathonPlan && marathonPlan.settings) {
         renderTodayPaces(marathonPlan.settings.defaultLt2Speed);
-    } else {
+    } else { 
         const zonesContainer = document.getElementById('today-zones-content');
         const repeatsContainer = document.getElementById('today-repeats-content');
         if(zonesContainer) zonesContainer.innerHTML = `<p class="text-xs text-stone-500 italic">Loading pace data...</p>`;
@@ -898,65 +896,55 @@ function renderTodaysTraining() {
     }
 }
 
-
 function renderThisWeeksPlan() {
     const container = document.getElementById('this-weeks-plan-content');
     if (!container || !marathonPlan || !marathonPlan.uiText || !marathonPlan.uiText.overview) {
         if(container) container.innerHTML = "<p>Loading this week's plan...</p>";
         return;
     }
-
     const thisWeeksPlanTitle = marathonPlan.uiText.overview.thisWeeksPlanTitle || "This Week"; 
-
     if (!currentRaceDate) {
         container.innerHTML = `<p class="text-sm text-sky-700">Set race date in <button onclick="document.getElementById('nav-calendar').click();" class="underline font-semibold">${marathonPlan.uiText.navButtonCalendar || 'Calendar'}</button> for this week's plan.</p>`;
         return;
     }
     if (datedTrainingPlan.length === 0 && currentRaceDate && marathonPlan) calculateAndStoreDatedTrainingPlan(currentRaceDate);
-
     const today = new Date();
-    const dayOfWeek = today.getDay();
-    const startOfWeekOffset = dayOfWeek === 0 ? -6 : 1 - dayOfWeek;
+    const dayOfWeek = today.getDay(); 
+    const startOfWeekOffset = dayOfWeek === 0 ? -6 : 1 - dayOfWeek; 
     const monday = new Date(new Date().setDate(today.getDate() + startOfWeekOffset));
-    monday.setHours(0, 0, 0, 0);
-    
+    monday.setHours(0, 0, 0, 0); 
     const currentWeekActivities = [];
     let weekNotes = ""; 
     let weekInfoFound = false;
-
     for (let i = 0; i < 7; i++) {
         const dayInWeek = addDays(monday, i);
-        dayInWeek.setHours(0,0,0,0);
+        dayInWeek.setHours(0,0,0,0); 
         const activityForDay = datedTrainingPlan.find(item => {
             const itemDate = new Date(item.date);
-            itemDate.setHours(0,0,0,0);
+            itemDate.setHours(0,0,0,0); 
             return isSameDay(itemDate, dayInWeek);
         });
-
-        let dayNameToDisplay;
+        let dayNameForTable;
+        let activityTextForTable;
         if (activityForDay) {
             if (!weekInfoFound) { 
                 weekNotes = activityForDay.notes || "";
                 weekInfoFound = true;
             }
-            const dayNameMatch = activityForDay.activity.match(/^([^:]+):/);
-            dayNameToDisplay = dayNameMatch ? dayNameMatch[1].trim() : dayInWeek.toLocaleDateString(undefined, { weekday: 'short' });
-
-            currentWeekActivities.push({
-                dayName: dayNameToDisplay,
-                activity: activityForDay.activity.replace(/^[^:]+:\s*/, '')
-            });
+            const parts = activityForDay.activity.split(':');
+            dayNameForTable = parts[0].trim(); 
+            activityTextForTable = parts.slice(1).join(':').trim(); 
         } else {
-             dayNameToDisplay = dayInWeek.toLocaleDateString(undefined, { weekday: 'short' });
-             currentWeekActivities.push({
-                dayName: dayNameToDisplay,
-                activity: "Rest or Unscheduled"
-            });
+            dayNameForTable = dayInWeek.toLocaleDateString(undefined, { weekday: 'short' }); 
+            activityTextForTable = "Rest or Unscheduled";
         }
+        currentWeekActivities.push({
+            dayName: dayNameForTable,
+            activity: activityTextForTable
+        });
     }
-    
     if (currentWeekActivities.length > 0) {
-        const dayColors = ['bg-red-50', 'bg-orange-50', 'bg-amber-50', 'bg-yellow-50', 'bg-lime-50', 'bg-green-50', 'bg-emerald-50'];
+        const dayColors = ['bg-red-50', 'bg-orange-50', 'bg-amber-50', 'bg-yellow-50', 'bg-lime-50', 'bg-green-50', 'bg-emerald-50']; 
         let tableRowsHtml = currentWeekActivities.map((dayEntry, index) => {
             const bgColor = dayColors[index % dayColors.length];
             return `<tr class="${bgColor}">
@@ -964,7 +952,6 @@ function renderThisWeeksPlan() {
                         <td class="p-3 text-stone-700">${dayEntry.activity}</td>
                     </tr>`;
         }).join('');
-
         container.innerHTML = `
             <div class="flex items-center mb-2">
                 <div class="flex-grow text-center"> 
@@ -993,27 +980,25 @@ function renderThisWeeksPlan() {
             </div>
         `;
         const pdfBtn = document.getElementById('printWeekPdfBtn');
-        if (pdfBtn) pdfBtn.addEventListener('click', printWeekToPdf);
-    } else {
+        if (pdfBtn) pdfBtn.addEventListener('click', printWeekToPdf); 
+    } else { 
         container.innerHTML = `<h3 class="text-lg font-semibold text-green-700 mb-1 text-center">${thisWeeksPlanTitle}</h3><p class="text-stone-600 text-center">No training scheduled for this week or plan not loaded.</p>`;
     }
 }
 
 function printWeekToPdf() {
     const printContent = document.getElementById('this-weeks-plan-printable-area');
-    if (printContent) window.print();
+    if (printContent) window.print(); 
 }
 
 function renderOverview() {
-    if (!marathonPlan || !marathonPlan.uiText || !marathonPlan.uiText.overview) return;
-    setActiveNav('nav-overview');
+    if (!marathonPlan || !marathonPlan.uiText || !marathonPlan.uiText.overview) return; 
+    setActiveNav('nav-overview'); 
     appContent.innerHTML = ''; 
     const overviewSection = document.createElement('section');
     overviewSection.id = "overview-content";
     overviewSection.className = "space-y-6";
-
-    const uiTextOverview = marathonPlan.uiText.overview;
-
+    const uiTextOverview = marathonPlan.uiText.overview; 
     overviewSection.innerHTML = `
         <div class="md:flex md:space-x-6 space-y-6 md:space-y-0 mb-6">
             <div id="todays-training-card" class="content-card p-4 md:flex-1">
@@ -1031,45 +1016,36 @@ function renderOverview() {
             <h2 class="text-xl sm:text-2xl font-semibold text-sky-700 mb-3">${marathonPlan.generalNotes.title || uiTextOverview.generalNotesTitle || 'Important Notes'}</h2>
             ${createHtmlList(marathonPlan.generalNotes.notes)}
         </div>
-        <div class="content-card overview-section-card">
-            <h2 class="text-xl sm:text-2xl font-semibold text-sky-700 mb-3">${uiTextOverview.mileageProgressionTitle || 'Overall Mileage Progression'}</h2>
-            <div class="chart-container bg-white p-2 rounded-md shadow">
-                <canvas id="mileageChart"></canvas>
-            </div>
-            <p class="text-xs text-stone-500 mt-2 text-center">Hover over points to see weekly mileage.</p>
-        </div>
         `;
     appContent.appendChild(overviewSection);
     renderTodaysTraining(); 
     renderThisWeeksPlan();
-    renderMileageChart();
 }
 
 function renderMileageChart() {
-    if (!marathonPlan || !marathonPlan.mileageProgressionData) {
-        console.warn("Mileage progression data not available for chart.");
-        const chartContainer = document.querySelector('.chart-container');
-        if (chartContainer) chartContainer.innerHTML = '<p class="text-center text-stone-500 italic">Mileage data not available.</p>';
+    if (!marathonPlan || !marathonPlan.mileageChartDataSource) {
+        console.warn("Mileage chart data source not available.");
+        return; 
+    }
+    const chartCanvas = document.getElementById('mileageChart'); 
+    if (!chartCanvas) {
+        console.warn("Mileage chart canvas not found. Ensure it's present in the active tab's HTML.");
         return;
     }
-    const chartCanvas = document.getElementById('mileageChart');
-    if (!chartCanvas) return;
-
-    const labels = marathonPlan.mileageProgressionData.map(item => item.label);
-    const dataPoints = marathonPlan.mileageProgressionData.map(item => item.km);
-    
-    if (mileageChartInstance) mileageChartInstance.destroy();
+    const labels = marathonPlan.mileageChartDataSource.map(item => item.label);
+    const dataPoints = marathonPlan.mileageChartDataSource.map(item => item.value);
+    if (mileageChartInstance) mileageChartInstance.destroy(); 
     mileageChartInstance = new Chart(chartCanvas.getContext('2d'), {
         type: 'line',
         data: { labels: labels, datasets: [{
-            label: 'Planned Weekly Kilometers', data: dataPoints, borderColor: '#0d9488',
+            label: 'Planned Weekly Kilometers', data: dataPoints, borderColor: '#0d9488', 
             backgroundColor: 'rgba(13, 148, 136, 0.1)', tension: 0.1, fill: true,
             pointBackgroundColor: '#0d9488', pointBorderColor: '#fff', pointHoverRadius: 7,
             pointHoverBackgroundColor: '#0d9488' }]
         },
         options: { responsive: true, maintainAspectRatio: false, scales: {
             y: { beginAtZero: true, title: { display: true, text: 'Kilometers (km)', font: { weight: '500' } } },
-            x: { title: { display: true, text: 'Training Week', font: { weight: '500' } }, ticks: { autoSkip: true, maxTicksLimit: 20 }}
+            x: { title: { display: true, text: 'Training Week', font: { weight: '500' } }, ticks: { autoSkip: true, maxTicksLimit: 20, callback: function(v,i,vals){ return this.getLabelForValue(v);}}} 
         }, plugins: {
             tooltip: { enabled: true, mode: 'index', intersect: false, backgroundColor: 'rgba(0,0,0,0.8)', titleFont: { weight: 'bold' }, callbacks: { label: function(ctx) { return `${ctx.dataset.label}: ${ctx.parsed.y} km`; } } },
             legend: { labels: { font: { weight: '500' } } }
@@ -1078,14 +1054,13 @@ function renderMileageChart() {
 }
 
 function renderNewsTab() {
-    if (!marathonPlan || !marathonPlan.uiText || !marathonPlan.uiText.news ) return;
-    setActiveNav('nav-news');
-    appContent.innerHTML = '';
+    if (!marathonPlan || !marathonPlan.uiText || !marathonPlan.uiText.news ) return; 
+    setActiveNav('nav-news'); 
+    appContent.innerHTML = ''; 
     const newsSection = document.createElement('section');
     newsSection.id = "news-content";
     newsSection.className = "space-y-6";
     const philosophyTitle = marathonPlan.philosophy.title || marathonPlan.uiText.news.philosophyTitle || "Training Philosophy";
-
     newsSection.innerHTML = `
         <div class="content-card news-section-card">
              <h2 class="text-xl sm:text-2xl font-semibold text-indigo-700 mb-3">${philosophyTitle}</h2>
@@ -1101,46 +1076,53 @@ function getPhaseButtonClass(phaseName) {
     if (nameLower.includes("base")) return "phase-button-base";
     if (nameLower.includes("specific")) return "phase-button-specific";
     if (nameLower.includes("taper")) return "phase-button-taper";
-    return "phase-button-base";
+    return "phase-button-base"; 
 }
 
 function renderTrainingPlan() {
-    if (!marathonPlan || !marathonPlan.uiText || !marathonPlan.uiText.plan) return;
-    setActiveNav('nav-plan');
-    appContent.innerHTML = '';
+    if (!marathonPlan || !marathonPlan.uiText || !marathonPlan.uiText.plan) return; 
+    setActiveNav('nav-plan'); 
+    appContent.innerHTML = ''; 
     const trainingPlanSection = document.createElement('section');
     trainingPlanSection.id = "training-plan-content";
     trainingPlanSection.className = "space-y-6";
     const phaseButtonsHtml = marathonPlan.phases.map((phase, index) => 
         `<button class="phase-button ${getPhaseButtonClass(phase.name)}" data-phase-index="${index}">${phase.name}</button>`
     ).join('');
-    
     const selectPhaseTitle = marathonPlan.uiText.plan.selectPhaseTitle || "Select Training Phase:";
-
+    const mileageProgressionTitleText = marathonPlan.uiText.overview?.mileageProgressionTitle || 'Overall Mileage Progression';
     trainingPlanSection.innerHTML = `
         <div>
             <h2 class="text-xl sm:text-2xl font-semibold text-sky-700 mb-4">${selectPhaseTitle}</h2>
             <div id="phase-navigation" class="flex flex-wrap gap-2 mb-6">${phaseButtonsHtml}</div>
             <div id="phase-details" class="space-y-4"><p class="text-stone-600 italic">Select a phase to see its details.</p></div>
         </div>
-        <div id="week-details-container" class="mt-6"></div>`;
+        <div id="week-details-container" class="mt-6"></div>
+        <div class="content-card overview-section-card mt-6"> 
+            <h2 class="text-xl sm:text-2xl font-semibold text-sky-700 mb-3">${mileageProgressionTitleText}</h2>
+            <div class="chart-container bg-white p-2 rounded-md shadow">
+                <canvas id="mileageChart"></canvas>
+            </div>
+            <p class="text-xs text-stone-500 mt-2 text-center">Hover over points to see weekly mileage.</p>
+        </div>`;
     appContent.appendChild(trainingPlanSection);
     document.querySelectorAll('#phase-navigation .phase-button').forEach(button => {
         button.addEventListener('click', (e) => {
             document.querySelectorAll('#phase-navigation .phase-button').forEach(btn => btn.classList.remove('active'));
             e.target.classList.add('active');
-            renderPhaseDetails(parseInt(e.target.dataset.phaseIndex));
+            renderPhaseDetails(parseInt(e.target.dataset.phaseIndex)); 
         });
     });
     if (marathonPlan.phases && marathonPlan.phases.length > 0) {
         const firstPhaseButton = document.querySelector('#phase-navigation .phase-button');
         if (firstPhaseButton) { firstPhaseButton.classList.add('active'); renderPhaseDetails(0); }
     }
+    renderMileageChart(); 
 }
 
 function formatPhaseDuration(durationString) {
     if (!durationString || typeof durationString !== 'string') return 'N/A';
-    const dateMatch = durationString.match(/\(([^)]+)\)/);
+    const dateMatch = durationString.match(/\(([^)]+)\)/); 
     let datePart = "";
     if (dateMatch) {
         let dates = dateMatch[1];
@@ -1156,30 +1138,27 @@ function getPhaseTitleTextColorClass(phaseName) {
     if (nameLower.includes("preseason")) return "text-gray-600"; 
     if (nameLower.includes("base")) return "text-sky-700";    
     if (nameLower.includes("specific")) return "text-green-700"; 
-    if (nameLower.includes("taper")) return "text-red-700";      
-    return "text-sky-700";
+    if (nameLower.includes("taper")) return "text-red-700";     
+    return "text-sky-700"; 
 }
 
 function renderPhaseDetails(phaseIndex) {
-    if (!marathonPlan || !marathonPlan.uiText || !marathonPlan.uiText.plan) return;
+    if (!marathonPlan || !marathonPlan.uiText || !marathonPlan.uiText.plan) return; 
     const phase = marathonPlan.phases[phaseIndex];
-    if (!phase) {
+    if (!phase) { 
         const div = document.getElementById('phase-details'); if(div) div.innerHTML = '<p class="text-red-500">Error: Could not load phase details.</p>'; return;
     }
     const phaseDetailsDiv = document.getElementById('phase-details');
     const weekDetailsContainer = document.getElementById('week-details-container');
-    if(weekDetailsContainer) weekDetailsContainer.innerHTML = '';
-    
+    if(weekDetailsContainer) weekDetailsContainer.innerHTML = ''; 
     const phaseTitleColorClass = getPhaseTitleTextColorClass(phase.name);
     const formattedDuration = formatPhaseDuration(phase.duration);
     const selectWeekTitle = marathonPlan.uiText.plan.selectWeekTitle || "Select a Week:";
-
     const weekButtonsHtml = (phase.weeks && Array.isArray(phase.weeks)) ? phase.weeks.map((week, index) => {
-        const weekDateRange = getWeekDateRangeString(week, phase.name);
-        const weekButtonTextColorClass = getPhaseTextColorClass(phase.name);
+        const weekDateRange = getWeekDateRangeString(week, phase.name); 
+        const weekButtonTextColorClass = getPhaseTextColorClass(phase.name); 
         return `<button class="week-button ${weekButtonTextColorClass}" data-phase-index="${phaseIndex}" data-week-index="${index}">${weekDateRange}</button>`
     }).join('') : '<p>No weeks available for this phase.</p>';
-
     if(phaseDetailsDiv) phaseDetailsDiv.innerHTML = `
         <div class="content-card">
             <h3 class="text-lg sm:text-xl font-semibold mb-2 phase-title-style ${phaseTitleColorClass}">${phase.name} ${formattedDuration}</h3>
@@ -1194,11 +1173,11 @@ function renderPhaseDetails(phaseIndex) {
                 btn.classList.remove('active');
                 const pIdxForClass = parseInt(btn.dataset.phaseIndex); 
                 const phaseNameForClass = marathonPlan.phases[pIdxForClass].name;
-                btn.classList.remove('bg-sky-600', 'border-sky-600', 'text-white');
-                btn.classList.add(getPhaseTextColorClass(phaseNameForClass));
+                btn.classList.remove('bg-sky-600', 'border-sky-600', 'text-white'); 
+                btn.classList.add(getPhaseTextColorClass(phaseNameForClass)); 
             });
-            e.currentTarget.classList.add('active');
-            e.currentTarget.classList.remove(getPhaseTextColorClass(phase.name));
+            e.currentTarget.classList.add('active'); 
+            e.currentTarget.classList.remove(getPhaseTextColorClass(phase.name)); 
             renderWeekDetails(parseInt(e.currentTarget.dataset.phaseIndex), parseInt(e.currentTarget.dataset.weekIndex));
         });
     });
@@ -1206,7 +1185,7 @@ function renderPhaseDetails(phaseIndex) {
         const firstWeekButton = document.querySelector(`#week-navigation-${phaseIndex} .week-button`);
         if (firstWeekButton) { 
             firstWeekButton.classList.add('active'); 
-            firstWeekButton.classList.remove(getPhaseTextColorClass(phase.name));
+            firstWeekButton.classList.remove(getPhaseTextColorClass(phase.name)); 
             renderWeekDetails(phaseIndex, 0); 
         }
     }
@@ -1217,18 +1196,18 @@ function getWeekDateRangeString(weekObject, phaseName) {
         return `Week ${weekObject.weekNum}`;
     }
     const activitiesInThisWeek = datedTrainingPlan.filter(dayActivity => 
-        dayActivity.phaseName === phaseName && dayActivity.weekNum == weekObject.weekNum
+        dayActivity.phaseName === phaseName && dayActivity.weekNum == weekObject.weekNum 
     );
-    if (activitiesInThisWeek.length === 0) return `Week ${weekObject.weekNum}`;
+    if (activitiesInThisWeek.length === 0) return `Week ${weekObject.weekNum}`; 
     const weekDates = activitiesInThisWeek.map(activity => new Date(activity.date)).sort((a, b) => a - b);
     const startDate = weekDates[0]; const endDate = weekDates[weekDates.length - 1];
-    const options = { month: 'short', day: 'numeric' };
+    const options = { month: 'short', day: 'numeric' }; 
     if (startDate && endDate) {
-        if (isSameDay(startDate, endDate)) return startDate.toLocaleDateString(undefined, options);
+        if (isSameDay(startDate, endDate)) return startDate.toLocaleDateString(undefined, options); 
         if (startDate.getMonth() === endDate.getMonth()) return `${startDate.toLocaleDateString(undefined, { month: 'short' })} ${startDate.getDate()} - ${endDate.getDate()}`;
         else return `${startDate.toLocaleDateString(undefined, options)} - ${endDate.toLocaleDateString(undefined, options)}`;
     }
-    return `Week ${weekObject.weekNum}`;
+    return `Week ${weekObject.weekNum}`; 
 }
 
 function getPhaseTextColorClass(phaseName) {
@@ -1237,29 +1216,28 @@ function getPhaseTextColorClass(phaseName) {
     if (nameLower.includes("base")) return "week-button-text-base";
     if (nameLower.includes("specific")) return "week-button-text-specific";
     if (nameLower.includes("taper")) return "week-button-text-taper";
-    return "week-button-text-base";
+    return "week-button-text-base"; 
 }
 
 function getDisplayKm(totalKmString) {
     if (!totalKmString || typeof totalKmString !== 'string') return 'N/A';
     const rangeMatch = totalKmString.match(/(\d+)\s*-\s*(\d+)/); if (rangeMatch) return `${rangeMatch[2]}km`;
     const singleMatch = totalKmString.match(/(\d+)/); if (singleMatch) return `${singleMatch[1]}km`;
-    return totalKmString;
+    return totalKmString; 
 }
 
 function renderWeekDetails(phaseIndex, weekIndex) {
-    if (!marathonPlan) return;
-    const week = marathonPlan.phases[phaseIndex]?.weeks[weekIndex];
-    if (!week) {
+    if (!marathonPlan) return; 
+    const week = marathonPlan.phases[phaseIndex]?.weeks[weekIndex]; 
+    if (!week) { 
         const div = document.getElementById('week-details-container'); if(div) div.innerHTML = '<p class="text-red-500">Error: Could not load week details.</p>'; return;
     }
     const weekDetailsContainer = document.getElementById('week-details-container');
-    const dayColors = ['bg-red-50', 'bg-orange-50', 'bg-amber-50', 'bg-yellow-50', 'bg-lime-50', 'bg-green-50', 'bg-emerald-50'];
+    const dayColors = ['bg-red-50', 'bg-orange-50', 'bg-amber-50', 'bg-yellow-50', 'bg-lime-50', 'bg-green-50', 'bg-emerald-50']; 
     let tableRowsHtml = (week.days && Array.isArray(week.days)) ? week.days.map((day, index) => {
         const parts = day.split(':'); const dayName = parts[0].trim(); const activity = parts.slice(1).join(':').trim();
         return `<tr class="${dayColors[index % dayColors.length]}"><td class="p-3 font-medium text-stone-800">${dayName}</td><td class="p-3 text-stone-700">${activity}</td></tr>`;
     }).join('') : '<tr><td colspan="2" class="p-3 text-stone-500">No daily schedule available.</td></tr>';
-    
     if(weekDetailsContainer) weekDetailsContainer.innerHTML = `
         <div class="content-card mt-4">
             <h4 class="text-lg font-semibold text-sky-700 mb-2">Week ${week.weekNum} (Total: ${getDisplayKm(week.totalKm)})</h4>
@@ -1281,18 +1259,17 @@ function getActivityThumbnailClass(activityText) {
     if (lowerActivity.startsWith("tempo")) return "activity-thumbnail-tempo";
     if (lowerActivity.startsWith("interval")) return "activity-thumbnail-interval";
     if (lowerActivity.startsWith("long run")) return "activity-thumbnail-long";
-    return "activity-thumbnail-default";
+    return "activity-thumbnail-default"; 
 }
 
 function renderCalendarTab() {
-    if (!marathonPlan || !marathonPlan.uiText || !marathonPlan.uiText.calendar) return;
-    setActiveNav('nav-calendar');
-    appContent.innerHTML = '';
+    if (!marathonPlan || !marathonPlan.uiText || !marathonPlan.uiText.calendar) return; 
+    setActiveNav('nav-calendar'); 
+    appContent.innerHTML = ''; 
     const calendarSection = document.createElement('section');
     calendarSection.id = "calendar-content"; calendarSection.className = "space-y-6";
     const raceDateValue = currentRaceDate ? currentRaceDate.toISOString().split('T')[0] : DEFAULT_RACE_DATE_STRING;
-    const uiText = marathonPlan.uiText.calendar;
-
+    const uiText = marathonPlan.uiText.calendar; 
     calendarSection.innerHTML = `
         <div class="content-card overview-section-card">
             <h2 class="text-xl sm:text-2xl font-semibold text-amber-500 mb-2">${uiText.mainTitle || 'Training Calendar'}</h2>
@@ -1312,12 +1289,12 @@ function renderCalendarTab() {
         </div>`;
     appContent.appendChild(calendarSection);
     document.getElementById('raceDateInput').addEventListener('change', (event) => {
-        const newRaceDate = new Date(event.target.value + 'T00:00:00');
+        const newRaceDate = new Date(event.target.value + 'T00:00:00'); 
         if (isValidDate(newRaceDate)) {
-            currentRaceDate = newRaceDate;
-            calculateAndStoreDatedTrainingPlan(newRaceDate);
+            currentRaceDate = newRaceDate; 
+            calculateAndStoreDatedTrainingPlan(newRaceDate); 
             calendarCurrentDisplayDate = new Date(newRaceDate.getFullYear(), newRaceDate.getMonth(), 1);
-            renderCalendarGrid();
+            renderCalendarGrid(); 
             document.getElementById('calendar-day-details-content').innerHTML = ''; 
             document.getElementById('calendar-selected-day-header').innerHTML = ''; 
             if (document.getElementById('nav-overview').classList.contains('active-overview')) {
@@ -1327,24 +1304,24 @@ function renderCalendarTab() {
     });
     document.getElementById('prevMonthBtn').addEventListener('click', () => { calendarCurrentDisplayDate.setMonth(calendarCurrentDisplayDate.getMonth() - 1); renderCalendarGrid(); document.getElementById('calendar-day-details-content').innerHTML = ''; document.getElementById('calendar-selected-day-header').innerHTML = ''; });
     document.getElementById('nextMonthBtn').addEventListener('click', () => { calendarCurrentDisplayDate.setMonth(calendarCurrentDisplayDate.getMonth() + 1); renderCalendarGrid(); document.getElementById('calendar-day-details-content').innerHTML = ''; document.getElementById('calendar-selected-day-header').innerHTML = ''; });
-    renderCalendarGrid();
+    renderCalendarGrid(); 
     renderSelectedCalendarDayDetails(new Date()); 
 }
 
 function renderCalendarGrid() {
     const gridContainer = document.getElementById('calendar-grid-container');
     const monthYearDisplay = document.getElementById('currentMonthYear');
-    if (!gridContainer || !monthYearDisplay) return;
+    if (!gridContainer || !monthYearDisplay) return; 
     gridContainer.innerHTML = ''; 
     const year = calendarCurrentDisplayDate.getFullYear(); const month = calendarCurrentDisplayDate.getMonth(); 
-    monthYearDisplay.textContent = calendarCurrentDisplayDate.toLocaleDateString(undefined, { month: 'long', year: 'numeric' });
+    monthYearDisplay.textContent = calendarCurrentDisplayDate.toLocaleDateString(undefined, { month: 'long', year: 'numeric' }); 
     const firstDayOfMonth = new Date(year, month, 1); const lastDayOfMonth = new Date(year, month + 1, 0);
     const daysInMonth = lastDayOfMonth.getDate();
-    let startingDayOfWeek = firstDayOfMonth.getDay(); if (startingDayOfWeek === 0) startingDayOfWeek = 6; else startingDayOfWeek--;
+    let startingDayOfWeek = firstDayOfMonth.getDay(); if (startingDayOfWeek === 0) startingDayOfWeek = 6; else startingDayOfWeek--; 
     const dayHeaders = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
     dayHeaders.forEach(header => { const hc = document.createElement('div'); hc.className = 'calendar-header'; hc.textContent = header; gridContainer.appendChild(hc); });
     for (let i = 0; i < startingDayOfWeek; i++) { const ec = document.createElement('div'); ec.className = 'calendar-day other-month'; gridContainer.appendChild(ec); }
-    const today = new Date(); today.setHours(0,0,0,0);
+    const today = new Date(); today.setHours(0,0,0,0); 
     for (let day = 1; day <= daysInMonth; day++) {
         const cell = document.createElement('div'); cell.className = 'calendar-day';
         const currentDateInLoop = new Date(year, month, day); currentDateInLoop.setHours(0,0,0,0);
@@ -1353,16 +1330,16 @@ function renderCalendarGrid() {
             itemDate.setHours(0,0,0,0);
             return isSameDay(itemDate, currentDateInLoop); 
         });
-        if (isSameDay(currentDateInLoop, today)) cell.classList.add('is-today');
+        if (isSameDay(currentDateInLoop, today)) cell.classList.add('is-today'); 
         let activityHtml = '';
-        if (activityForDay) {
+        if (activityForDay) { 
             cell.classList.add('has-activity');
-            let activityText = activityForDay.activity.replace(/^[^:]+:\s*/, '');
+            let activityText = activityForDay.activity.replace(/^[^:]+:\s*/, ''); 
             cell.classList.add(getActivityThumbnailClass(activityText)); 
-            cell.addEventListener('click', () => renderSelectedCalendarDayDetails(currentDateInLoop));
+            cell.addEventListener('click', () => renderSelectedCalendarDayDetails(currentDateInLoop)); 
             activityHtml = `<span class="activity-thumbnail ${getActivityThumbnailClass(activityText)}">${activityText.substring(0,12)}${activityText.length > 12 ? '...' : ''}</span>`;
         }
-        cell.innerHTML = `<span class="day-number">${day}</span>` + activityHtml;
+        cell.innerHTML = `<span class="day-number">${day}</span>` + activityHtml; 
         gridContainer.appendChild(cell);
     }
 }
@@ -1370,18 +1347,15 @@ function renderCalendarGrid() {
 function renderSelectedCalendarDayDetails(date) {
     const detailsContainer = document.getElementById('calendar-day-details-content');
     const headerContainer = document.getElementById('calendar-selected-day-header');
-    if (!detailsContainer || !headerContainer) return;
-
+    if (!detailsContainer || !headerContainer) return; 
     const activityDetails = datedTrainingPlan.find(item => {
         const itemDate = new Date(item.date); itemDate.setHours(0,0,0,0);
         const selectedDate = new Date(date); selectedDate.setHours(0,0,0,0);
         return isSameDay(itemDate, selectedDate);
     });
-
     headerContainer.innerHTML = `<h4 class="text-lg font-semibold text-sky-700">${formatDate(date, { month: 'long', day: 'numeric', year: 'numeric' })}</h4>`;
-
-    if (activityDetails) {
-        let activityText = activityDetails.activity.replace(/^[^:]+:\s*/, '');
+    if (activityDetails) { 
+        let activityText = activityDetails.activity.replace(/^[^:]+:\s*/, ''); 
         detailsContainer.innerHTML = `
             <div class="content-card mt-0" id="calendar-day-details-printable-area"> 
                 <p class="mb-1">
@@ -1391,7 +1365,7 @@ function renderSelectedCalendarDayDetails(date) {
                 <p class="text-xs text-stone-500 mb-1">Phase: ${activityDetails.phaseName} | Week: ${activityDetails.weekNum}</p>
                 ${activityDetails.notes ? `<p class="text-sm italic mt-1"><strong class="text-black text-xs">Weekly Notes:</strong> <span class="text-stone-800 text-sm">${activityDetails.notes}</span></p>` : ''}
             </div>`;
-    } else {
+    } else { 
         detailsContainer.innerHTML = `
             <div class="content-card mt-0">
                 <p class="text-stone-600">No training scheduled for this day.</p>
@@ -1399,30 +1373,159 @@ function renderSelectedCalendarDayDetails(date) {
     }
 }
 
+function renderRaceTab() {
+    if (!marathonPlan || !marathonPlan.uiText || !marathonPlan.uiText.race || !marathonPlan.settings) {
+        appContent.innerHTML = "<p>Race information is currently unavailable. Please check sheet configuration.</p>";
+        return;
+    }
+    setActiveNav('nav-race');
+    appContent.innerHTML = ''; 
+    const raceSection = document.createElement('section');
+    raceSection.id = "race-content";
+    raceSection.className = "space-y-6";
+
+    const uiTextRace = marathonPlan.uiText.race;
+    const raceName = marathonPlan.settings.raceName || "N/A";
+    const raceDateFormatted = currentRaceDate ? formatDate(currentRaceDate) : (marathonPlan.settings.raceDate ? formatDate(new Date(marathonPlan.settings.raceDate + 'T00:00:00')) : "N/A");
+    const raceDistance = marathonPlan.settings.raceDistanceKm || "N/A";
+
+    let tacticsHtml = `<h3 class="text-xl font-semibold text-violet-700 mb-3">${uiTextRace.tacticsTitle || "Race Strategy & Tactics"}</h3>`;
+    
+    if (marathonPlan.raceTactics) {
+        if (marathonPlan.raceTactics.pacing && Array.isArray(marathonPlan.raceTactics.pacing) && marathonPlan.raceTactics.pacing.length > 0) {
+            tacticsHtml += `<div class="mb-4"><h4 class="text-lg font-medium text-violet-600 mb-1">${uiTextRace.pacingSectionTitle || "Pacing Strategy"}</h4>${createHtmlList(marathonPlan.raceTactics.pacing)}</div>`;
+        }
+        if (marathonPlan.raceTactics.nutrition && Array.isArray(marathonPlan.raceTactics.nutrition) && marathonPlan.raceTactics.nutrition.length > 0) {
+            tacticsHtml += `<div class="mb-4"><h4 class="text-lg font-medium text-violet-600 mb-1">${uiTextRace.nutritionSectionTitle || "Nutrition & Hydration Plan"}</h4>${createHtmlList(marathonPlan.raceTactics.nutrition)}</div>`;
+        }
+        if (marathonPlan.raceTactics.mentalPrep && Array.isArray(marathonPlan.raceTactics.mentalPrep) && marathonPlan.raceTactics.mentalPrep.length > 0) {
+            tacticsHtml += `<div class="mb-4"><h4 class="text-lg font-medium text-violet-600 mb-1">${uiTextRace.mentalPrepSectionTitle || "Mental Preparation"}</h4>${createHtmlList(marathonPlan.raceTactics.mentalPrep)}</div>`;
+        }
+         if (marathonPlan.raceTactics.gear && Array.isArray(marathonPlan.raceTactics.gear) && marathonPlan.raceTactics.gear.length > 0) {
+            tacticsHtml += `<div class="mb-4"><h4 class="text-lg font-medium text-violet-600 mb-1">${uiTextRace.gearChecklistTitle || "Gear Checklist"}</h4>${createHtmlList(marathonPlan.raceTactics.gear)}</div>`;
+        }
+    } else {
+        tacticsHtml += "<p class='text-stone-500 italic'>Race tactics templates will appear here. Configure in 'Plan Overview' sheet.</p>";
+    }
+
+    raceSection.innerHTML = `
+        <div class="content-card race-section-card">
+            <h2 class="text-2xl sm:text-3xl font-bold text-violet-700 mb-3 text-center">${uiTextRace.mainTitle || "Race Day Hub"}</h2>
+            
+            <div class="mb-6 p-4 bg-violet-50 rounded-lg shadow race-section-card">
+                <h3 class="text-xl font-semibold text-violet-600 mb-2 pb-1 border-b-2 border-violet-500">${uiTextRace.raceDetailsTitle || "Race Details"}</h3>
+                <p class="text-lg"><strong class="text-violet-600 font-semibold">${uiTextRace.raceNameLabel || "Race:"}</strong> <span class="text-stone-700 font-bold">${raceName}</span></p>
+                <p class="text-lg"><strong class="text-violet-600 font-semibold">${uiTextRace.raceDateLabel || "Date:"}</strong> <span class="text-stone-700 font-bold">${raceDateFormatted}</span></p>
+                <p class="text-lg"><strong class="text-violet-600 font-semibold">${uiTextRace.raceDistanceLabel || "Distance:"}</strong> <span class="text-stone-700 font-bold">${raceDistance} km</span></p>
+            </div>
+
+            <div class="mb-6" id="raceElevationChartContainer">
+                <h3 class="text-xl font-semibold text-violet-600 mb-2">${uiTextRace.elevationProfileTitle || "Elevation Profile (per km)"}</h3>
+                <div class="chart-container bg-white p-2 rounded-md shadow">
+                    <canvas id="raceElevationChart"></canvas>
+                </div>
+                <p class="text-xs text-stone-500 mt-2 text-center">Elevation gain per kilometer of the race course.</p>
+            </div>
+            
+            <div class="race-section-card p-4 rounded-lg bg-white shadow">
+                ${tacticsHtml}
+            </div>
+        </div>
+    `;
+    appContent.appendChild(raceSection);
+    renderRaceElevationChart();
+}
+
+function renderRaceElevationChart() {
+    if (!marathonPlan || !marathonPlan.raceElevationData || marathonPlan.raceElevationData.length === 0) {
+        const container = document.getElementById('raceElevationChartContainer');
+        if (container) { 
+            const chartCanvas = document.getElementById('raceElevationChart');
+            if (chartCanvas) chartCanvas.style.display = 'none'; 
+            const p = container.querySelector('p.text-xs'); 
+            if (p) p.textContent = "No elevation data available for this race. Please add data to 'RaceElevationData' sheet.";
+            else container.insertAdjacentHTML('beforeend', "<p class='text-stone-500 italic p-4 text-center'>No elevation data available. Add to 'RaceElevationData' sheet.</p>");
+        }
+        console.warn("Race elevation data not available or empty.");
+        return;
+    }
+    const chartCanvas = document.getElementById('raceElevationChart');
+    if (!chartCanvas) {
+        console.warn("Race elevation chart canvas not found.");
+        return;
+    }
+    chartCanvas.style.display = 'block'; 
+
+    const labels = marathonPlan.raceElevationData.map(item => `Km ${item.kilometer}`);
+    const dataPoints = marathonPlan.raceElevationData.map(item => item.elevationGain);
+
+    if (raceElevationChartInstance) {
+        raceElevationChartInstance.destroy();
+    }
+    raceElevationChartInstance = new Chart(chartCanvas.getContext('2d'), {
+        type: 'line', // Changed to line graph
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Elevation Gain (m)',
+                data: dataPoints,
+                borderColor: 'rgba(124, 58, 237, 1)', // Violet line
+                backgroundColor: 'rgba(124, 58, 237, 0.2)', // Light violet fill
+                tension: 0.1, // Slight curve to the line
+                fill: true // Fill area under the line
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    // beginAtZero: true, // Keep if you want y-axis to start at 0, or false to auto-scale
+                    title: { display: true, text: 'Elevation Gain (meters)', font: { weight: '500' } }
+                },
+                x: {
+                    title: { display: true, text: 'Kilometer of Race', font: { weight: '500' } },
+                    ticks: { autoSkip: true, maxTicksLimit: Math.ceil((marathonPlan.settings.raceDistanceKm || 21) / 2) } 
+                }
+            },
+            plugins: {
+                tooltip: {
+                    enabled: true,
+                    mode: 'index',
+                    intersect: false,
+                    callbacks: {
+                        label: function(context) {
+                            return `Km ${context.label.replace('Km ','')}: ${context.parsed.y} m gain`;
+                        }
+                    }
+                },
+                legend: { display: false } 
+            }
+        }
+    });
+}
+
 function renderPaceUtilities() {
-    if (!marathonPlan || !marathonPlan.uiText || !marathonPlan.uiText.pacer) return;
-    setActiveNav('nav-pacer');
-    appContent.innerHTML = '';
+    if (!marathonPlan || !marathonPlan.uiText || !marathonPlan.uiText.pacer) return; 
+    setActiveNav('nav-pacer'); 
+    appContent.innerHTML = ''; 
     const paceUtilsSection = document.createElement('section');
     paceUtilsSection.id = "pace-utils-content";
     paceUtilsSection.className = "space-y-6";
-    const uiText = marathonPlan.uiText.pacer;
-
+    const uiText = marathonPlan.uiText.pacer; 
     paceUtilsSection.innerHTML = `
         <div class="content-card">
             <h2 class="text-xl sm:text-2xl font-semibold text-sky-700 mb-4">${uiText.zoneRepeatsCalculatorTitle || 'Zone & Repeats Calculator'}</h2>
             <div class="mb-6">
                 <label for="lt2speed" class="block text-sm font-medium text-stone-700 mb-1">${uiText.lt2SpeedLabel || 'Enter LT2 Speed (pace per km):'}</label>
                 <input type="text" id="lt2speed" name="lt2speed" placeholder="e.g., 4:30" class="mt-1 block w-full px-4 py-3 border border-stone-300 rounded-lg shadow-sm sm:text-sm transition duration-150 ease-in-out">
-                <div id="error-message-calc" class="text-red-500 text-sm mt-2 h-5"></div>
-            </div>
+                <div id="error-message-calc" class="text-red-500 text-sm mt-2 h-5"></div> </div>
             <button onclick="calculatePacesFromUtil()" class="w-full bg-sky-600 hover:bg-sky-700 text-white font-semibold py-3 px-4 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-opacity-50 transition duration-150 ease-in-out transform hover:scale-105">${uiText.calculateZonesButton || 'Calculate Paces'}</button>
             <div class="mt-8 md:flex md:space-x-6">
                 <div id="zones-section-util" class="flex-1"><h3 class="text-lg font-semibold text-stone-700 mb-2 border-b border-stone-300 pb-2">${uiText.trainingZonesHeader || 'Training Zones:'}</h3><div id="zones-content-util"><p class="text-stone-500 italic text-sm">Enter LT2 speed and click calculate.</p></div></div>
                 <div id="repeats-section-util" class="flex-1 mt-8 md:mt-0"><h3 class="text-lg font-semibold text-stone-700 mb-2 border-b border-stone-300 pb-2">${uiText.repeatsPacesHeader || 'Repeats Paces:'}</h3><div id="repeats-content-util"><p class="text-stone-500 italic text-sm">Calculated based on LT2 speed.</p></div></div>
             </div>
         </div>
-
         <div class="content-card mt-8">
             <h2 class="text-xl sm:text-2xl font-semibold text-sky-700 mb-6 text-center">${uiText.cardiacDriftCalculatorTitle || 'Cardiac Drift Calculator'}</h2>
             <div class="space-y-5">
@@ -1457,7 +1560,7 @@ function renderPaceUtilities() {
     `;
     appContent.appendChild(paceUtilsSection);
     document.getElementById('lt2speed').addEventListener('keypress', (event) => { if (event.key === 'Enter') { event.preventDefault(); calculatePacesFromUtil(); }});
-    setupCardiacDriftCalculatorListeners();
+    setupCardiacDriftCalculatorListeners(); 
 }
 
 function parsePaceToSeconds(paceString) { 
@@ -1470,18 +1573,18 @@ function parsePaceToSeconds(paceString) {
 function formatSecondsToPace(totalSeconds) { 
     if (isNaN(totalSeconds) || totalSeconds < 0) return "N/A";
     const minutes = Math.floor(totalSeconds / 60); const seconds = Math.round(totalSeconds % 60); 
-    return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+    return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`; 
 }
 function calculatePacesFromUtil() { 
     const lt2SpeedInput = document.getElementById('lt2speed').value;
     const zonesContentDiv = document.getElementById('zones-content-util');
     const repeatsContentDiv = document.getElementById('repeats-content-util');
-    const errorMessageDivCalc = document.getElementById('error-message-calc');
+    const errorMessageDivCalc = document.getElementById('error-message-calc'); 
     zonesContentDiv.innerHTML = '<p class="text-stone-500 italic text-sm">Calculating...</p>';
     repeatsContentDiv.innerHTML = '<p class="text-stone-500 italic text-sm">Calculating...</p>';
     if(errorMessageDivCalc) errorMessageDivCalc.textContent = ''; 
     const lt2SpeedInSeconds = parsePaceToSeconds(lt2SpeedInput);
-    if (isNaN(lt2SpeedInSeconds) || lt2SpeedInSeconds <= 0) {
+    if (isNaN(lt2SpeedInSeconds) || lt2SpeedInSeconds <= 0) { 
         if(errorMessageDivCalc) errorMessageDivCalc.textContent = 'Invalid LT2 speed. Use mm:ss format (e.g., 4:30).';
         zonesContentDiv.innerHTML = '<p class="text-red-500 italic text-sm">Invalid input.</p>';
         repeatsContentDiv.innerHTML = '<p class="text-red-500 italic text-sm">Invalid LT2 input.</p>'; return;
@@ -1493,12 +1596,12 @@ function calculatePacesFromUtil() {
         { name: "Z4", descriptor: "Threshold", lowPaceFactor: 1.00, highPaceFactor: 0.91, colorClass: "text-amber-500" }, 
         { name: "Z5", descriptor: "VO2 Max", lowPaceFactor: 0.90, highPaceFactor: 0.83, colorClass: "text-red-600" } 
     ];
-    const racePaceInfo = { name: "MP (Est.)", descriptor: "", lowPaceFactor: 1.15, highPaceFactor: 1.10, colorClass: "text-purple-600" };
+    const racePaceInfo = { name: "MP (Est.)", descriptor: "", lowPaceFactor: 1.15, highPaceFactor: 1.10, colorClass: "text-purple-600" }; 
     zonesContentDiv.innerHTML = ''; 
     const zonesTable = document.createElement('table'); zonesTable.className = 'data-table text-sm w-full';
     zonesTable.innerHTML = `<thead><tr><th class="p-2">Zone</th><th class="p-2">Pace</th></tr></thead><tbody></tbody>`;
     const zonesTbody = zonesTable.querySelector('tbody');
-    [...zonesData, racePaceInfo].forEach(zone => {
+    [...zonesData, racePaceInfo].forEach(zone => { 
         const sPS = lt2SpeedInSeconds*zone.lowPaceFactor; 
         const fPS = lt2SpeedInSeconds*zone.highPaceFactor; 
         const row = zonesTbody.insertRow();
@@ -1516,7 +1619,7 @@ function calculatePacesFromUtil() {
     repeatsTable.innerHTML = `<thead><tr><th class="p-2">Dist.</th><th class="p-2">Time</th><th class="p-2">Pace/km</th></tr></thead><tbody></tbody>`;
     const rTbody = repeatsTable.querySelector('tbody');
     repeatDistances.forEach(item => {
-        const tPPS = lt2SpeedInSeconds*item.f; const tTDS = tPPS*item.m;
+        const tPPS = lt2SpeedInSeconds*item.f; const tTDS = tPPS*item.m; 
         const row = rTbody.insertRow();
         row.insertCell().innerHTML = `<strong class="text-teal-700">${item.d}</strong>`;
         row.insertCell().textContent = formatSecondsToPace(tTDS);
@@ -1532,64 +1635,56 @@ function convertPaceToKmhCD(paceStr) {
     if (parts.length !== 2) return null;
     const minutes = parseInt(parts[0], 10); const seconds = parseInt(parts[1], 10);
     if (isNaN(minutes) || isNaN(seconds) || seconds < 0 || seconds >= 60 || minutes < 0) return null;
-    const totalMinutes = minutes + seconds / 60;
-    if (totalMinutes === 0) return null;
-    return 60 / totalMinutes;
+    const totalMinutes = minutes + seconds / 60; 
+    if (totalMinutes === 0) return null; 
+    return 60 / totalMinutes; 
 }
-
 function calculateCardiacDriftSimplifiedCD(paceStart_kmh, hrStart_bpm, paceEnd_kmh, hrEnd_bpm) {
     if (hrStart_bpm <= 0 || hrEnd_bpm <= 0) return "Error: Heart rate values must be positive.";
-    if (paceStart_kmh === null || paceEnd_kmh === null) return "Error: Invalid pace format.";
+    if (paceStart_kmh === null || paceEnd_kmh === null) return "Error: Invalid pace format."; 
     if (paceStart_kmh < 0 || paceEnd_kmh < 0) return "Error: Pace values cannot be negative.";
-    const paHr_Start = paceStart_kmh / hrStart_bpm; const paHr_End = paceEnd_kmh / hrEnd_bpm;
-    if (paHr_Start === 0) return paHr_End === 0 ? 0 : "Error: Pa:Hr at start is zero.";
+    const paHr_Start = paceStart_kmh / hrStart_bpm; 
+    const paHr_End = paceEnd_kmh / hrEnd_bpm;     
+    if (paHr_Start === 0) return paHr_End === 0 ? 0 : "Error: Pa:Hr at start is zero."; 
     const driftPercentage = ((paHr_Start - paHr_End) / paHr_Start) * 100;
-    return parseFloat(driftPercentage.toFixed(2));
+    return parseFloat(driftPercentage.toFixed(2)); 
 }
-
 function setupCardiacDriftCalculatorListeners() {
     const calculateButton = document.getElementById('cardiacDriftCalculateButton');
     if (calculateButton) calculateButton.addEventListener('click', handleCardiacDriftCalculation);
 }
-
 function handleCardiacDriftCalculation() {
     const startPaceInput = document.getElementById('cardiacDriftStartPace');
     const startHrInput = document.getElementById('cardiacDriftStartHr');
     const endPaceInput = document.getElementById('cardiacDriftEndPace');
     const endHrInput = document.getElementById('cardiacDriftEndHr');
     const resultArea = document.getElementById('cardiacDriftResultArea');
-
     resultArea.className = 'mt-6 p-4 rounded-md min-h-[50px] text-center font-medium text-base sm:text-lg result-default';
     resultArea.textContent = 'Calculating...';
-
     const paceStartStr = startPaceInput.value; const hrStart = parseFloat(startHrInput.value);
     const paceEndStr = endPaceInput.value; const hrEnd = parseFloat(endHrInput.value);
-
     if (isNaN(hrStart) || isNaN(hrEnd)) { displayCardiacDriftError('Error: Enter valid numbers for Heart Rate.'); return; }
     const paceStart_kmh = convertPaceToKmhCD(paceStartStr); const paceEnd_kmh = convertPaceToKmhCD(paceEndStr);
     if (paceStart_kmh === null || paceEnd_kmh === null) { displayCardiacDriftError('Error: Invalid pace format (mm:ss).'); return; }
-
     const result = calculateCardiacDriftSimplifiedCD(paceStart_kmh, hrStart, paceEnd_kmh, hrEnd);
-    if (typeof result === 'number') displayCardiacDriftResult(result);
-    else displayCardiacDriftError(result);
+    if (typeof result === 'number') displayCardiacDriftResult(result); 
+    else displayCardiacDriftError(result); 
 }
-
 function displayCardiacDriftError(message) {
     const resultArea = document.getElementById('cardiacDriftResultArea');
     if (!resultArea) return;
     resultArea.textContent = message;
-    resultArea.classList.remove('result-blue', 'result-yellow', 'result-red', 'result-default');
-    resultArea.classList.add('error-display');
+    resultArea.classList.remove('result-blue', 'result-yellow', 'result-red', 'result-default'); 
+    resultArea.classList.add('error-display'); 
 }
-
 function displayCardiacDriftResult(driftValue) {
     const resultArea = document.getElementById('cardiacDriftResultArea');
     if (!resultArea) return;
     resultArea.textContent = `Cardiac Drift: ${driftValue}%`;
-    resultArea.classList.remove('error-display', 'result-default');
-    if (driftValue <= 5.10) resultArea.classList.add('result-blue');
-    else if (driftValue <= 7.00) resultArea.classList.add('result-yellow');
-    else resultArea.classList.add('result-red');
+    resultArea.classList.remove('error-display', 'result-default'); 
+    if (driftValue <= 5.10) resultArea.classList.add('result-blue');      
+    else if (driftValue <= 7.00) resultArea.classList.add('result-yellow'); 
+    else resultArea.classList.add('result-red');        
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -1603,30 +1698,30 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('nav-news').textContent = 'News';
     document.getElementById('nav-plan').textContent = 'Training Plan';
     document.getElementById('nav-calendar').textContent = 'Calendar';
+    document.getElementById('nav-race').textContent = 'Race'; 
     document.getElementById('nav-pacer').textContent = 'Pacer';
-
 
     const loginButton = document.getElementById('loginButton');
     if(loginButton) loginButton.addEventListener('click', handleLogin);
     const userIdInput = document.getElementById('userIdInput');
-    if(userIdInput) userIdInput.addEventListener('keypress', (event) => { if (event.key === 'Enter') { event.preventDefault(); handleLogin(); }});
+    if(userIdInput) userIdInput.addEventListener('keypress', (event) => { if (event.key === 'Enter') { event.preventDefault(); handleLogin(); }}); 
     
     const lastUserId = localStorage.getItem('lastUserID');
-    const lastWebAppUrl = localStorage.getItem('lastWebAppUrl');
+    const lastWebAppUrl = localStorage.getItem('lastWebAppUrl'); 
     if (lastUserId && lastWebAppUrl) {
         const userIdInputEl = document.getElementById('userIdInput');
-        if (userIdInputEl) userIdInputEl.value = lastUserId;
-        currentWebAppUrl = lastWebAppUrl;
-        loginLoadingMessageDiv.classList.remove('hidden');
-        fetchMarathonPlan(currentWebAppUrl).then(success => {
-            if (success) initializeApp();
-            else {
+        if (userIdInputEl) userIdInputEl.value = lastUserId; 
+        currentWebAppUrl = lastWebAppUrl; 
+        loginLoadingMessageDiv.classList.remove('hidden'); 
+        fetchMarathonPlan(currentWebAppUrl).then(success => { 
+            if (success) initializeApp(); 
+            else { 
                 loginLoadingMessageDiv.classList.add('hidden');
-                loginContainer.classList.remove('hidden');
-                mainAppWrapper.classList.add('hidden');
+                loginContainer.classList.remove('hidden'); 
+                mainAppWrapper.classList.add('hidden'); 
             }
         });
-    } else {
+    } else { 
          loginContainer.classList.remove('hidden');
          mainAppWrapper.classList.add('hidden');
     }
